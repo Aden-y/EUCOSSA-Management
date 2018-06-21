@@ -2,7 +2,7 @@
 
 //PDO database connection file for the project
 class Db_Connect{
-//attributes to use for connection.. i have used full names for all to understand
+//attributes to use for connection.. i have used full names for all to understand..they must be private ..encapsulation u know
     private $serverName;
     private $userName;
     private $userPass;
@@ -10,7 +10,7 @@ class Db_Connect{
     private $charset;
 //Doesn't require Constructor
 
-//connection method which is protected meaning it will be visible to classes that connect to the method
+//connection method which is protected meaning it will be visible to classes that extend  to the method
     protected function connect(){
 
     	//name of the server....currently its my localhost
