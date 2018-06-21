@@ -44,6 +44,7 @@ class User
 
 	}
 	//verify user login credetials and if valid login user and set session variables. else return a string message PASSWORD_INCORRECT
+	//the user will be able to login with either email or reg_number   
 	public function userLogin($table,$email_Or_Reg_number,$password){
 		$sql="SELECT * from '$table' where email='$email_Or_Reg_number' or reg_number='$email_Or_Reg_number'";
 		$result=maysqli_query($this->con,$sql) or die($this->con->error);
@@ -63,6 +64,23 @@ class User
 			return "PASSWORD_INCORRECT";
 		}
 
+	}
+	//for changing password
+	public function changePassword($table,$email,$password,$new_password){
+		$sql="SELECT * from '$table' where email='$email'";
+		$result= mysqli_query($this->con,$sql) or die($this->con->error);
+		$row=maysqli_fetch_assoc($result);
+		if (password_verify($password,$row["password"])) {
+			$hashed_password=password_hash($new_password,PASSWORD_DEFAULT);
+			$update="UPDATE '$table' set  password= '$hashed_password'where email='$email'";
+			$result=mysqli_query($this->con,$update) or die($this->con->error);
+			if ($result) {
+			return true;
+			}else{
+				return false;
+			}
+
+		}
 	}
 }
 
