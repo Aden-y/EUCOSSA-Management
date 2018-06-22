@@ -11,7 +11,7 @@ private $pwd;//password of the user
 private $c_pwd;//just to confirm the password from form
 private $hashed_pwd;//the hashed password
 private $hashed_c_pwd;//the hashed confirm password
-private $time//time of account creation ... system generated
+private $time;//time of account creation ... system generated 
 
 
 //constructor with all parameters... MUST Be Public
@@ -29,7 +29,20 @@ public function __construct($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashed_c_p
 	$this->time=$time;
 
 }
-
+//to verify if the email entered by user is alredy used
+private function emailUsed($email,$username){
+	$query="SELECT * FROM /*EUCOSA.users*/ WHERE email= ? or  username=?";
+	$pre=$this->connect()->prepare($query);
+	$pre->execute([$email,$username]);
+	$rows=$pre->rowCount();
+ 
+	if ($rows>0) {
+		
+		return true;
+	}else{
+		return false;
+	}
+}
 
 //method that creates the Account with all Parameters as use in construtor
 public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashed_c_pwd,$time){
@@ -46,6 +59,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	
 
 	//verify if the passwords match
+	if (!$this->emailUsed($email,$username)) {
 		if(password_verify($this->pwd,$this->hashed_pwd) != password_verify($this->c_pwd,$this->hashed_c_pwd)){
 
 			//javascript code to alert incase passwords do not match
@@ -80,6 +94,11 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 
 		}
+	}else{
+	echo "<script>alert('The username or email is already used')</script>";
+	echo "<script>window.open('../signup.php','_self')</script>";
+	exit();
+}
 
 			
 }
