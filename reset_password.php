@@ -28,6 +28,8 @@ class resetPass extends Db_Connect{
 		if (password_verify($this->pass,$row['password'])) {
 			if (password_verify($new_pass,password_hash($new_pass,PASSWORD_DEFAULT)) !=password_verify($con_new_pass,password_hash($con_new_pass,PASSWORD_DEFAULT))) {
 			echo "<script> alert('Passwords dont match')</script>";
+			echo "<script>window.open('reset_password.php','_self')</script>";
+			     exit();
 			}else{
 				$update="UPDATE /*EUCOSA.users*/ set password=? where email=? and name=?";//the database and table goes here
 				$update_run=$this->connect()->prepare($update);
@@ -38,6 +40,8 @@ class resetPass extends Db_Connect{
 			
 		}else{
 			echo "<script> alert('Enter correct innitial password')</script>";
+			echo "<script>window.open('reset_password.php','_self')</script>";
+			exit();
 
 		}
 
