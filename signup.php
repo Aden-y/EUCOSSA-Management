@@ -55,7 +55,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	$this->time=$time;
 
 //pattern of a valid email to be used in preg_match
-	$pattern="/^[_a-z0-9-_]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
+	$pattern="/^[a-z0-9-_]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
 	
 
 	//verify if the passwords match
@@ -69,7 +69,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	
 		}else
 
-			//verify email if valid
+			//verify if email is valid
 		if(!preg_match($pattern, $this->email)){
 
 				echo "<script>alert('Invalid Email')</script>";
