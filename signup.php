@@ -34,7 +34,7 @@ private function userNameTaken($username){
 
 	$this->username=$username;
 
-	$query="SELECT * FROM /*EUCOSA.users*/ WHERE username=?";
+	$query="SELECT * FROM EUCOSSA.users WHERE usr_nm=?";
 	$pre=$this->connect()->prepare($query);
 	$pre->execute([$this->username]);
 	$rows=$pre->rowCount();
@@ -85,7 +85,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//insertion query
 
-			$insert="INSERT INTO EUCOSA.users(usr_nm,email,pwd,day) VALUES ('$this->username','$this->email','$this->hashed_pwd','$this->time')";
+			$insert="INSERT INTO EUCOSSA.users(usr_nm,email,pwd,day) VALUES ('$this->username','$this->email','$this->hashed_pwd','$this->time')";
 
 			//calls connect method in dtabbase connection class and execute the query
 			$insert_results=$this->connect()->exec($insert);
@@ -136,10 +136,10 @@ if(isset($_POST['buttontosignup'])){
 	return $currentDate;
 }
 
-	$inusername=$_POST[/*'username'*/];
-	$inemail=$_POST[/*'email'*/];
-	$inpwd=$_POST[/*'password'*/];
-	$inc_pwd=$_POST[/*'confirm your password'*/];
+	$inusername=$_POST['username'];
+	$inemail=$_POST['email'];
+	$inpwd=$_POST['password'];
+	$inc_pwd=$_POST['conpass'];
 
 	//hash and salt the passwords
 	$hashedPwd = password_hash($inpwd,PASSWORD_DEFAULT);

@@ -20,10 +20,10 @@ class Db_Connect{
         $this->userName="root";
 
         //password of the database please write the password of your user on your local server coz we are not using  the same server
-        $this->userPass="********";
+        $this->userPass="";
 
         //the name of the database as it will be agreed on
-        $this->dbName ="";
+        $this->dbName ="EUCOSSA";
 
         //recommended character set for PDO connection and queries
         $this->charset="utf8mb4";
