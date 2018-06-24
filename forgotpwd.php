@@ -51,6 +51,7 @@ class ForgotPass extends Db_Connect{
 	}
 }
 
+//destruction method
 public function __destruct(){
 
 
