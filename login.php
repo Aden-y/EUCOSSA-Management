@@ -28,7 +28,7 @@ class getUsers extends Db_Connect{
 			$this->pass=$pass;
 
 			//SQL query to search if username exists
-			$query ="SELECT * FROM all_project_tests.users WHERE user_nm=? OR email=?";
+			$query ="SELECT * FROM EUCOSA.users WHERE usr_nm=? OR email=?";
 
 			//connect to d
 			$run_query=$this->connect()->prepare($query);
@@ -66,7 +66,7 @@ class getUsers extends Db_Connect{
 									//if passwords match
 
 								//create sessions
-							$_SESSION['session name']=$row[/*'user name from db'*/];
+							$_SESSION['username']=$row[/*'user name from db'*/];
 							$_SESSION['email']=$row[/*'email from db'*/];
 							
 							//show some success nofication and open the index window

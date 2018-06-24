@@ -30,10 +30,13 @@ public function __construct($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashed_c_p
 
 }
 //to verify if the email entered by user is alredy used
-private function emailUsed($email,$username){
-	$query="SELECT * FROM /*EUCOSA.users*/ WHERE email= ? or  username=?";
+private function userNameTaken($username){
+
+	$this->username=$username;
+
+	$query="SELECT * FROM /*EUCOSA.users*/ WHERE username=?";
 	$pre=$this->connect()->prepare($query);
-	$pre->execute([$email,$username]);
+	$pre->execute([$this->username]);
 	$rows=$pre->rowCount();
  
 	if ($rows>0) {
@@ -59,12 +62,12 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	
 
 	//verify if the passwords match
-	if (!$this->emailUsed($email,$username)) {
+	if (!$this->userNameTaken($this->username)) {
 		if(password_verify($this->pwd,$this->hashed_pwd) != password_verify($this->c_pwd,$this->hashed_c_pwd)){
 
 			//javascript code to alert incase passwords do not match
 				echo "<script>alert('Password Do Not Match')</script>";
-				echo "<script>window.open('../signup.php','_self')</script>";
+				echo "<script>window.open('signup.php','_self')</script>";
 				exit();
 	
 		}else
@@ -73,7 +76,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 		if(!preg_match($pattern, $this->email)){
 
 				echo "<script>alert('Invalid Email')</script>";
-				echo "<script>window.open('../signup.php','_self')</script>";
+				echo "<script>window.open('signup.php','_self')</script>";
 				exit();
 
 		}
@@ -82,7 +85,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//insertion query
 
-			$insert="INSERT INTO /*name of the database goes here*/(/*table fields in specific order*/) VALUES ('$this->username','$this->email','$this->hashed_pwd','$this->time')";
+			$insert="INSERT INTO EUCOSA.users(usr_nm,email,pwd,day) VALUES ('$this->username','$this->email','$this->hashed_pwd','$this->time')";
 
 			//calls connect method in dtabbase connection class and execute the query
 			$insert_results=$this->connect()->exec($insert);
@@ -90,13 +93,13 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//notify success in account creation...Java Script
 			echo"<script>alert('Account Created Sucessfully')</script>";
-			echo"<script>window.open('../login.php','_self')</script>;";
+			echo"<script>window.open('login.php','_self')</script>;";
 
 
 		}
 	}else{
-	echo "<script>alert('The username or email is already used')</script>";
-	echo "<script>window.open('../signup.php','_self')</script>";
+	echo "<script>alert('The user Name is taken')</script>";
+	echo "<script>window.open('signup.php','_self')</script>";
 	exit();
 }
 
