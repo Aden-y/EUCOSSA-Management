@@ -141,6 +141,15 @@ if(isset($_POST['buttontosignup'])){
 	$inpwd=$_POST['password'];
 	$inc_pwd=$_POST['conpass'];
 
+    if(($inusername=="")||($inemail=="")||($inpwd=="")|| ($inc_pwd=="")){
+
+
+        echo "<script>alert('All fields are required')</script>";
+        echo "<script>window.open('signupPage.php','_self')</script>";
+        exit();
+
+    }
+
 	//hash and salt the passwords
 	$hashedPwd = password_hash($inpwd,PASSWORD_DEFAULT);
 	$hashedinc_Pwd = password_hash($inc_pwd,PASSWORD_DEFAULT);
