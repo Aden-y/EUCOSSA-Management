@@ -11,17 +11,17 @@ class deleteAccount extends DB_Connect{
     }
     //Function to delete account from database
     function perform(){
-        if(isset($_SESSION[/*name of user session variable*/]) || isset($_SESSION[/*name of email session variable*/])){
+        if(isset($_SESSION['username']) && isset($_SESSION['email'])){
            
             //Get variables from session
-            $user = $_SESSION[/*name of user session variable*/];
-            $email = $_SESSION[/*name of email session variable*/];
+            $user = $_SESSION['username'];
+            $email = $_SESSION['email'];
            
-            $query = "DELETE FROM git./*Table Name*/ where userName= ? OR email= ? ;";
+            $query = "DELETE FROM EUCOSSA.users where usr_nm= ? OR email= ? ;";
             $pre=$this->connect()->prepare($query);
-	   $pre->execute([$user,$email]);
+	       $pre->execute([$user,$email]);
             session_destroy();//Close session after deleting account
-            echo  "<script>window.location.href='Home_page';</script>";//Redirect to home page
+            echo  "<script>window.location.href='index.php';</script>";//Redirect to home page
         }
     } 
 }
