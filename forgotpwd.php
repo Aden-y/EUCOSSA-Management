@@ -40,7 +40,7 @@ class ForgotPass extends Db_Connect{
 	}else{
 
 		echo "<script>alert('Email Not Found')</script>";
-		echo "<script>window.open('forgotpwd.php','_self')</script>";
+		echo "<script>window.open('forgotpwdpage.php','_self')</script>";
 		exit();
 
 		
