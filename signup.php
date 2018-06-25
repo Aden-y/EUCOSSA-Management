@@ -88,7 +88,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			$insert="INSERT INTO EUCOSSA.users(usr_nm,email,pwd,day) VALUES ('$this->username','$this->email','$this->hashed_pwd','$this->time')";
 
-			//calls connect method in dtabbase connection class and execute the query
+			//calls connect method in database connection class and execute the query
 			$insert_results=$this->connect()->exec($insert);
 
 
@@ -103,7 +103,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	}else
 
 	{
-	echo "<script>alert('The user Name is taken')</script>";
+	echo "<script>alert('User Name Already taken!')</script>";
 	echo "<script>window.open('signupPage.php','_self')</script>";
 	exit();
 }
@@ -111,7 +111,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 			
 }
 
-//destructer of the class that ends database connection
+//destructor of the class that ends database connection
 
 public function __destruct(){
 
@@ -153,7 +153,7 @@ if(isset($_POST['buttontosignup'])){
 	//get the date and time the account was created
 	$timeCreated=date('y/m/d');
 
-//create the class object and pass in the constructer values in their order
+//create the class object and pass in the constructor values in their order
 	$myAccount = new NewAccount($inusername,$inemail,$inpwd,$inc_pwd,$hashedPwd,$hashedinc_Pwd,$timeCreated);
 
 //call to the method that create user and pass in values from the html form
