@@ -5,7 +5,7 @@ include_once 'login.php';
 
 class resetPass extends Db_Connect{
 
-//attributes to login
+//attributes to login 
 	private $username;
 	private $email;
 	private $pass;
