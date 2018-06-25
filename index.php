@@ -14,11 +14,11 @@
 </head>
 <body>
 	<h1>Welcome <?php echo $_SESSION['username'];?></h1>
-	<a href="resetPasswordPage.php">Reset password</a>
+	<a href="resetPasswordPage.php">Reset password</a><br><br>
 	<a href="logout.php">Logout</a>
 
 
 </body>
 </html>
 
-<?php }?>>
+<?php }?>
