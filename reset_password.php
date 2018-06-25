@@ -33,6 +33,7 @@ class resetPass extends Db_Connect{
 			echo "<script>window.open('resetPasswordPage.php','_self')</script>";
 			     exit();
 			}else{
+<<<<<<< HEAD
             if(strlen($new_pass)<8){
                 echo "<script> alert('Password should be a minimum of 8 characters')</script>";
                 echo "<script>window.open('resetPasswordPage.php','_self')</script>";
@@ -44,6 +45,19 @@ class resetPass extends Db_Connect{
                 header("Location: index.php?msg=Password updates successfully");
             }
 
+=======
+
+				if (strlen($new_pass)<8) {
+			echo "<script> alert('Password must be atleast 8 characters')</script>";
+			echo "<script>window.open('resetPasswordPage.php','_self')</script>";
+				}else{
+				$update="UPDATE EUCOSSA.users set pwd=? where email=? and usr_nm=?";//the database and table goes here
+				$update_run=$this->connect()->prepare($update);
+		       $update_run->execute([password_hash($new_pass,PASSWORD_DEFAULT),$email,$username]);
+		      // echo "<script> alert('Password changed successfully')</script>";
+		       header("Location: index.php?msg=Password updates successfully");
+				}
+>>>>>>> 93858fdbd0c313d1ae354a5d7a12b96003928814
 			}
 			
 		}else{

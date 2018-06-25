@@ -23,7 +23,7 @@ class ForgotPass extends Db_Connect{
 	if(!preg_match($pattern, $this->email)){
 
 				echo "<script>alert('Invalid Email')</script>";
-				echo "<script>window.open('forgotpwd.php','_self')</script>";
+				echo "<script>window.open('forgotpwdpage.php','_self')</script>";
 				exit();
 
 		}else{
@@ -36,13 +36,11 @@ class ForgotPass extends Db_Connect{
  
 	if ($rows>0) {
 		
-
-		//get the email to send mail
 		return $this->email;
 	}else{
 
 		echo "<script>alert('Email Not Found')</script>";
-		echo "<script>window.open('forgotpwd.php','_self')</script>";
+		echo "<script>window.open('forgotpwdpage.php','_self')</script>";
 		exit();
 
 		
@@ -62,7 +60,7 @@ public function __destruct(){
 
 class ConfirmMail extends ForgotPass {
 
-		private $email
+		private $email;
 
 		public function __construct($email){
 
@@ -71,19 +69,20 @@ class ConfirmMail extends ForgotPass {
 
 		public function sendConfirmMail($email){
 
-			$this->email=$email
+			$this->email=$email;
 			$subject="Reset Password";
 			$recipient=$this->getUserEmail($this->email);
 
 			//body of the mail from with link to password reset page
 			$body='To reset your password"<a href="http://127.0.0.1/reset_password.php>Clic Here</a>" and reset. Dont Reply';
 
+
 			$send= mail($recipient, $subject, $body,'From: root@locolhost.com');
 
 			if(!$send){
 				//will be removed if mail function works
 				echo "<script>alert('Mail not Send')</script>";
-				echo "<script>window.open('forgotpwd.php','_self')</script>";
+				//echo "<script>window.open('forgotpwd.php','_self')</script>";
 			}
 
 			else{
@@ -106,6 +105,6 @@ if(isset($_POST['forgotpwd'])){
 	$inemail = $_POST['email'];
 
 	$forgot = new ConfirmMail($inemail);
-	$forgot = new sendConfirmMail($inemail);
+	$forgot ->sendConfirmMail($inemail);
 
 }

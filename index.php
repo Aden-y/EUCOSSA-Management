@@ -15,6 +15,7 @@
 <body>
 	<h1>Welcome <?php echo $_SESSION['username'];?></h1>
 	<a href="resetPasswordPage.php">Reset password</a>
+	<a href="logout.php">Logout</a>
 
 
 </body>
