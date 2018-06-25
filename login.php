@@ -28,7 +28,7 @@ class getUsers extends Db_Connect{
 			$this->pass=$pass;
 
 			//SQL query to search if username exists
-			$query ="SELECT * FROM EUCOSA.users WHERE usr_nm=? OR email=?";
+			$query ="SELECT * FROM EUCOSSA.users WHERE usr_nm=? OR email=?";
 
 			//connect to d
 			$run_query=$this->connect()->prepare($query);
@@ -42,7 +42,7 @@ class getUsers extends Db_Connect{
 
 					//if not found echo out some error js
 					echo "<script>alert('Username or Email Not Found')</script>";
-					echo "<script>window.open('login.php','_self')</script>";
+					echo "<script>window.open('loginpage.php','_self')</script>";
 
 			}else{
 
@@ -66,8 +66,8 @@ class getUsers extends Db_Connect{
 									//if passwords match
 
 								//create sessions
-							$_SESSION['username']=$row[/*'user name from db'*/];
-							$_SESSION['email']=$row[/*'email from db'*/];
+							$_SESSION['username']=$row['usr_nm'];
+							$_SESSION['email']=$row['email'];
 							
 							//show some success nofication and open the index window
 							echo "<script>alert('Login Successful')</script>";
@@ -83,10 +83,10 @@ class getUsers extends Db_Connect{
 	}
  }
 
-if(isset($_POST['signin'])){
+if(isset($_POST['login'])){
 
-	$username=$_POST[/*'username or email from form'*/];
-	$pass=$_POST[/*'password from form'*/];
+	$username=$_POST['username'];
+	$pass=$_POST['password'];
 
 //create an object of the class with its parameters
 	$allow = new getUsers($username,$username,$pass);
