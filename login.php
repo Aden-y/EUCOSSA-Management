@@ -68,9 +68,11 @@ class getUsers extends Db_Connect{
 								//create sessions
 							$_SESSION['username']=$row['usr_nm'];
 							$_SESSION['email']=$row['email'];
+							$_SESSION['id']=$row['id'];
 							
 							//show some success nofication and open the index window
-							echo "<script>alert('Login Successful')</script>";
+							//echo "<script>alert('Login Successful')</script>";
+							header("Location: index.php?msg=logged in Successfully");
 
 							}
 					}

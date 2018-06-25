@@ -20,28 +20,30 @@ class resetPass extends Db_Connect{
 	if(isset($_SESSION['username']) && isset($_SESSION['email'])){
 		//get user details from the database
 
-		$query="SELECT * from EUCOSA.users where usr_nm=? and email=?";
+		$query="SELECT * from EUCOSSA.users where usr_nm=? and email=?";
 		$run_query=$this->connect()->prepare($query);
 		$run_query->execute([$username,$email]);
 		$row = $run_query->fetch(PDO::FETCH_ASSOC);
 
+
 		//see if the user has entered the correct initial password
-		if (password_verify($this->pass,$row['password'])) {
-			if (password_verify($new_pass,password_hash($new_pass,PASSWORD_DEFAULT)) !=password_verify($con_new_pass,password_hash($con_new_pass,PASSWORD_DEFAULT))) {
+		if (password_verify($this->pass,$row['pwd'])) {
+			if ($new_pass !=$con_new_pass) {
 			echo "<script> alert('Passwords dont match')</script>";
-			echo "<script>window.open('reset_password.php','_self')</script>";
+			echo "<script>window.open('resetPasswordPage.php','_self')</script>";
 			     exit();
 			}else{
-				$update="UPDATE EUCOSA.users set pwd=? where email=? and usr_nm=?";//the database and table goes here
+				$update="UPDATE EUCOSSA.users set pwd=? where email=? and usr_nm=?";//the database and table goes here
 				$update_run=$this->connect()->prepare($update);
-		       $update_run->execute([password_hash($new_pass,PASSWORD_DEFAULT),$email],$username);
-		       echo "<script> alert('Password changed successfully')</script>";
+		       $update_run->execute([password_hash($new_pass,PASSWORD_DEFAULT),$email,$username]);
+		      // echo "<script> alert('Password changed successfully')</script>";
+		       header("Location: index.php?msg=Password updates successfully");
 
 			}
 			
 		}else{
 			echo "<script> alert('Enter correct innitial password')</script>";
-			echo "<script>window.open('reset_password.php','_self')</script>";
+			echo "<script>window.open('resetPasswordPage.php','_self')</script>";
 			exit();
 
 		}
@@ -49,7 +51,7 @@ class resetPass extends Db_Connect{
 	}else{
 
 			echo "<script> alert('Please Login First To Reset Password')</script>";
-			echo "<script>window.open('login.php','_self')</script>";
+			echo "<script>window.open('loginpage.php','_self')</script>";
 			exit();
 
 		}	
@@ -87,7 +89,7 @@ class resetPass extends Db_Connect{
 			}else{
 
 
-				$query="SELECT * from EUCOSA.users where email=?";
+				$query="SELECT * from EUCOSSA.users where email=?";
 				$run_query=$this->connect()->prepare($query);
 				$run_query->execute([$email]);
 				$row = $run_query->fetch(PDO::FETCH_ASSOC);
@@ -110,7 +112,7 @@ class resetPass extends Db_Connect{
 				}else
 					{
 
-					$update="UPDATE EUCOSA.users set pwd=? where email=?";//the database and table goes here
+					$update="UPDATE EUCOSSA.users set pwd=? where email=?";//the database and table goes here
 					$update_run=$this->connect()->prepare($update);
 			        $update_run->execute($hashedpass,$email);
 			        echo "<script> alert('Password changed successfully')</script>";
@@ -123,31 +125,31 @@ class resetPass extends Db_Connect{
 
 }
 
-if(isset($_POST[/*'update'*/])){
-    $email=$_SESSION['email'];
-	$username=$_SESSION['username'];
-	$pass=$_POST[/*'password'*/];
-	$con_pass=$_POST[/*'con_pass'*/];
-	$initial_pass=$_POST[/*'initial'*/];
+if(isset($_POST['update'])){
+    $email=$_POST['email'];
+	$username=$_POST['username'];
+	$pass=$_POST['password'];
+	$con_pass=$_POST['con_pass'];
+	$initial_pass=$_POST['initial_pass'];
 
-	$allow = new resetPass($username,$email,$initial_pass);
+	$ChangePassword = new resetPass($username,$email,$initial_pass);
 
 //call method to update password
-	$allow->updatePassword($email,$username,$initial_pass,$pass,$con_pass);
+	$ChangePassword->updatePassword($email,$username,$initial_pass,$pass,$con_pass);
 
 }
 
 //loads default when reset page loads
 
-if(isset($_POST[/*'email'*/] && $_POST[/*'pass'*/] && $_POST[/*'c_pass'*/])){
+//if(isset($_POST[/*'email'*/] && $_POST[/*'pass'*/] && $_POST[/*'c_pass'*/])){
 
-$inemail=$_POST[/*'email'*/];
-$inpass=$_POST[/*'pass'*/];
-$inc_pass=$_POST[/*'c_pass'*/];
+//$inemail=$_POST[/*'email'*/];
+//$inpass=$_POST[/*'pass'*/];
+//$inc_pass=$_POST[/*'c_pass'*/];
 
-$reset = new PassReset($inemail,$inpass,$inc_pass);
+//$reset = new PassReset($inemail,$inpass,$inc_pass);
 
-$reset->resetPassMailLink($inemail,$inpass,$inc_pass);
+//$reset->resetPassMailLink($inemail,$inpass,$inc_pass);
 
-}
+//}
 ?>

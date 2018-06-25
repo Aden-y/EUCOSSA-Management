@@ -3,7 +3,7 @@
 
 	if(!isset($_SESSION['username'])){
 
-			header('location: loginpage.php');
+			header('location: loginpage.php?msg=please login first');
 
 	}else{	
 ?>
@@ -14,6 +14,8 @@
 </head>
 <body>
 	<h1>Welcome <?php echo $_SESSION['username'];?></h1>
+	<a href="resetPasswordPage.php">Reset password</a>
+
 
 </body>
 </html>

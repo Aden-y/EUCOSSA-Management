@@ -29,7 +29,7 @@ class ForgotPass extends Db_Connect{
 		}else{
 
 
-	$query="SELECT * FROM EUCOSA.users WHERE email=?";
+	$query="SELECT * FROM EUCOSSA.users WHERE email=?";
 	$pre=$this->connect()->prepare($query);
 	$pre->execute([$this->email]);
 	$rows=$pre->rowCount();

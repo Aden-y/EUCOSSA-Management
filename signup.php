@@ -63,7 +63,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 	//verify if the passwords match
 	if (!$this->userNameTaken($this->username)) {
-		if(password_verify($this->pwd,$this->hashed_pwd) != password_verify($this->c_pwd,$this->hashed_c_pwd)){
+		if(password_verify($this->pwd,password_hash($this->pwd,PASSWORD_DEFAULT)) != password_verify($this->c_pwd,password_hash($this->c_pwd,PASSWORD_DEFAULT))){
 
 			//javascript code to alert incase passwords do not match
 				echo "<script>alert('Password Do Not Match')</script>";
@@ -93,7 +93,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//notify success in account creation...Java Script
 			echo"<script>alert('Account Created Sucessfully')</script>";
-			echo"<script>window.open('login.php','_self')</script>;";
+			echo"<script>window.open('loginpage.php','_self')</script>;";
 
 
 		}
