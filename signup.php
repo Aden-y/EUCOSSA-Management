@@ -59,9 +59,15 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 //pattern of a valid email to be used in preg_match
 	$pattern="/^[a-z0-9-_]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
-	
+
+	//verify if the passwords has more than 8 characters
+    if(strlen($pwd)<8){
+        echo "<script> alert('Password should be a minimum of 8 characters')</script>";
+        echo "<script>window.open('resetPasswordPage.php','_self')</script>";}
+        else
 
 	//verify if the passwords match
+
 	if (!$this->userNameTaken($this->username)) {
 		if(password_verify($this->pwd,password_hash($this->pwd,PASSWORD_DEFAULT)) != password_verify($this->c_pwd,password_hash($this->c_pwd,PASSWORD_DEFAULT))){
 
