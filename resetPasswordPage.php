@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
        <label>username</label>
          <input type="text" name="username" readonly value="<?php echo  $_SESSION['username']?>">
                 <label>Email</label>
-         <input type="text" name="email" readonly> value="<?php echo  $_SESSION['email']?>">
+         <input type="text" name="email" readonly value="<?php echo  $_SESSION['email']?>">
    		<label>Enter innitial password</label>
    		<input type="password" name="initial_pass">
    		   		<label>Enter new password</label>
