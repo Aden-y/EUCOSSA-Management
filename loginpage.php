@@ -11,7 +11,7 @@
 		<input type="Submit" name="login" value ="Login"></br></br></br>
 	</form>
 	<a href="forgotpassword.php"><i>Forgot Password?</i></a></br>
-	<a href="signup.php">Sign Up</a>
+	<a href="signupPage.php">Sign Up</a>
 
 </body>
 </html>

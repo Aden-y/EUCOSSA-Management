@@ -62,21 +62,22 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	
 
 	//verify if the passwords match
-	if (!$this->userNameTaken($this->username)) {
-		if(password_verify($this->pwd,$this->hashed_pwd) != password_verify($this->c_pwd,$this->hashed_c_pwd)){
+	if (!$this->userNameTaken($this->username)) 
+	{
+		if(($this->pwd) != ($this->c_pwd))
+		{
 
 			//javascript code to alert incase passwords do not match
 				echo "<script>alert('Password Do Not Match')</script>";
-				echo "<script>window.open('signup.php','_self')</script>";
+				//echo "<script>window.open('signupPage.php','_self')</script>";
+				echo 'P1='.$this->pwd.'<br> P2='.$this->c_pwd;
 				exit();
 	
-		}else
-
-			//verify if email is valid
-		if(!preg_match($pattern, $this->email)){
+		}else if(!preg_match($pattern, $this->email))
+		{
 
 				echo "<script>alert('Invalid Email')</script>";
-				echo "<script>window.open('signup.php','_self')</script>";
+				echo "<script>window.open('signupPage.php','_self')</script>";
 				exit();
 
 		}
@@ -93,13 +94,17 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//notify success in account creation...Java Script
 			echo"<script>alert('Account Created Sucessfully')</script>";
-			echo"<script>window.open('login.php','_self')</script>;";
+			echo"<script>window.open('loginpage.php','_self')</script>;";
 
 
 		}
-	}else{
+
+
+	}else
+
+	{
 	echo "<script>alert('The user Name is taken')</script>";
-	echo "<script>window.open('signup.php','_self')</script>";
+	echo "<script>window.open('signupPage.php','_self')</script>";
 	exit();
 }
 
@@ -146,7 +151,7 @@ if(isset($_POST['buttontosignup'])){
 	$hashedinc_Pwd = password_hash($inc_pwd,PASSWORD_DEFAULT);
 
 	//get the date and time the account was created
-	$timeCreated=getTheCurrentDate();
+	$timeCreated=date('y/m/d');
 
 //create the class object and pass in the constructer values in their order
 	$myAccount = new NewAccount($inusername,$inemail,$inpwd,$inc_pwd,$hashedPwd,$hashedinc_Pwd,$timeCreated);
