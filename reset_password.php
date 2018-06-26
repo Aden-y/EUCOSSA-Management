@@ -96,8 +96,6 @@ class resetPass extends Db_Connect{
 		//method to reset pass from mail
 		public function resetPassMailLink($email,$pass,$confim_pwd){
 
-			$hashedpass=password_hash($pass,PASSWORD_DEFAULT);
-			$hashedC_pwd=password_hash($confim_pwd,PASSWORD_DEFAULT);
 
 			$pattern="/^[a-z0-9-_]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
 
@@ -121,7 +119,7 @@ class resetPass extends Db_Connect{
 
 			}else
 			{
-				if(password_verify($pass,$hashedpass) != password_verify($confim_pwd,$hashedC_pwd))
+				if($pass!= $confim_pwd)
 				{
 
 							echo "<script> alert('Passwords Do Not Match')</script>";
@@ -160,15 +158,15 @@ if(isset($_POST['update'])){
 
 //loads default when reset page loads
 
-//if(isset($_POST[/*'email'*/] && $_POST[/*'pass'*/] && $_POST[/*'c_pass'*/])){
+if(isset('newpass'){
 
-//$inemail=$_POST[/*'email'*/];
-//$inpass=$_POST[/*'pass'*/];
-//$inc_pass=$_POST[/*'c_pass'*/];
+$inemail=$_POST['email'];
+$inpass=$_POST['pass'];
+$inc_pass=$_POST['c_pass'];
 
-//$reset = new PassReset($inemail,$inpass,$inc_pass);
+$reset = new PassReset($inemail,$inpass,$inc_pass);
 
-//$reset->resetPassMailLink($inemail,$inpass,$inc_pass);
+$reset->resetPassMailLink($inemail,$inpass,$inc_pass);
 
-//}
+}
 ?>
