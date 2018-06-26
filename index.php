@@ -18,10 +18,7 @@
 	<a href="resetPasswordPage.php">Reset password</a><br><br>
 
 	<a href="logout.php">Log out</a><br><br>
-    <form action="loggedIn.php" method="post">
-    <input type=submit value="Delete Account" name="deleteAccount"/>
-    
-    </form>
+    <a href="pwd_to_delete.php">Delete Account</a>
 </body>
 </html>
 

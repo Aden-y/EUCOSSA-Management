@@ -21,11 +21,10 @@ class deleteAccount extends DB_Connect{
             $pre=$this->connect()->prepare($query);
 	       $pre->execute([$user,$email]);
             session_destroy();//Close session after deleting account
+            echo "<script>alert('Account deleted Successfully')</script>"
             echo  "<script>window.location.href='index.php';</script>";//Redirect to home page
         }
     } 
 }
-
 $delete = new deleteAccount();
-
 ?>
