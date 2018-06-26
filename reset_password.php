@@ -158,7 +158,8 @@ if(isset($_POST['update'])){
 
 //loads default when reset page loads
 
-if(isset('newpass'){
+else 
+	if(isset($POST['newpass'])){
 
 $inemail=$_POST['email'];
 $inpass=$_POST['pass'];

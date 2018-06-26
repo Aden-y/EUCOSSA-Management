@@ -21,6 +21,6 @@ class user extends DB_Connect
 if(isset($_POST['deleteAccount'])){
     
     $currentUser = new user();
-    $currentUser::deleteAccount();
+    $currentUser->deleteAccount();
 }
 ?>

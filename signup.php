@@ -125,23 +125,6 @@ public function __destruct(){
 if(isset($_POST['buttontosignup'])){
 
 
-	//method to get current date and time
-
-
-
-	//get my time zone
-	 	function getTheCurrentDate(){
-
-	//get my time zone
-	 	$zone = new DateTimeZone('Africa/Nairobi'); 
-
-       $date = new DateTime('now',$zone);
-
-        $currentDate=$date->format('l, F jS, Y, g:i A');
-
-	return $currentDate;
-}
-
 	$inusername=$_POST['username'];
 	$inemail=$_POST['email'];
 	$inpwd=$_POST['password'];
@@ -161,7 +144,7 @@ if(isset($_POST['buttontosignup'])){
 	$hashedinc_Pwd = password_hash($inc_pwd,PASSWORD_DEFAULT);
 
 	//get the date and time the account was created
-	$timeCreated=getTheCurrentDate();
+	$timeCreated=date('d/m/y');
 
 //create the class object and pass in the constructer values in their order
 	$myAccount = new NewAccount($inusername,$inemail,$inpwd,$inc_pwd,$hashedPwd,$hashedinc_Pwd,$timeCreated);
