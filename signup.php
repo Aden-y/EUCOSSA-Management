@@ -69,8 +69,8 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//javascript code to alert incase passwords do not match
 				echo "<script>alert('Password Do Not Match')</script>";
-				//echo "<script>window.open('signupPage.php','_self')</script>";
-				echo 'P1='.$this->pwd.'<br> P2='.$this->c_pwd;
+				echo "<script>window.open('signupPage.php','_self')</script>";
+				//echo 'P1='.$this->pwd.'<br> P2='.$this->c_pwd;
 				exit();
 	
 		}else if(!preg_match($pattern, $this->email))

@@ -78,7 +78,7 @@ class ConfirmMail extends ForgotPass {
 			//body of the mail from with link to password reset page
 			$body='To reset your password"<a href="http://127.0.0.1/reset_password.php>Clic Here</a>" and reset. Dont Reply';
 
-			$send= mail($recipient, $subject, $body,"From\r\n");
+			$send= mail($recipient, $subject, $body,'From: root@locolhost.com');
 
 			if(!$send){
 				//will be removed if mail function works
