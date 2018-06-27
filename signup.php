@@ -63,7 +63,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 	//verify if the passwords has more than 8 characters
     if(strlen($pwd)<8){
         echo "<script> alert('Password should be a minimum of 8 characters')</script>";
-        echo "<script>window.open('resetPasswordPage.php','_self')</script>";}
+        echo "<script>window.open('signupPage.php','_self')</script>";}
         else
 
 	//verify if the passwords match
@@ -73,7 +73,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 
 			//javascript code to alert incase passwords do not match
 				echo "<script>alert('Password Do Not Match')</script>";
-				echo "<script>window.open('signup.php','_self')</script>";
+				echo "<script>window.open('signupPage.php','_self')</script>";
 				exit();
 	
 		}else
@@ -82,7 +82,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 		if(!preg_match($pattern, $this->email)){
 
 				echo "<script>alert('Invalid Email')</script>";
-				echo "<script>window.open('signup.php','_self')</script>";
+				echo "<script>window.open('signupPage.php','_self')</script>";
 				exit();
 
 		}
