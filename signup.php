@@ -105,7 +105,7 @@ public function createNewAccount($username,$email,$pwd,$c_pwd,$hashed_pwd,$hashe
 		}
 	}else{
 	echo "<script>alert('The user Name is taken')</script>";
-	echo "<script>window.open('signup.php','_self')</script>";
+	echo "<script>window.open('signupPage.php','_self')</script>";
 	exit();
 }
 
