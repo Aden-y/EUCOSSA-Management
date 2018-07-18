@@ -1,5 +1,6 @@
 <?php
 include "db_Connection.php";
+session_start();
 class user extends Db_Connect{
   public function deleteAccount($pass){
       $query ="SELECT * FROM EUCOSSA.users WHERE usr_nm=? OR email=?";
@@ -7,7 +8,7 @@ class user extends Db_Connect{
       $run_query=$this->connect()->prepare($query);
 
 			//execute query
-      $run_query->execute(["kodhek","brianjmbugua@gmail.com"]);
+      $run_query->execute([$_SESSION['username'],$_SESSION['email']]);
       if($run_query->rowCount()<1){
 
 
