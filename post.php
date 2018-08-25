@@ -25,12 +25,10 @@ class post extends Db_Connect{
     }
     public function get_post_file(){
         if($this->post_file === 0){
-           echo "<script>alert('I did not even try to upload $this->post_file');</script>"; 
         }else{
             $file = $_FILES['file']['name'];
             $target_dir = "post/";
             $target_file = $target_dir.basename($_FILES["file"]["name"]);
-            echo "<script>alert('$target_file is me');</script>";
             $exts = array("jpg","png");
             $ext = strtolower(end(explode('.',$_FILES["file"]['name'])));
             if($target_file == $target_dir){
@@ -41,7 +39,6 @@ class post extends Db_Connect{
                 echo "<script>alert('File type not allowed');</script>";
                 return -1;
             }else if(move_uploaded_file($_FILES['file']["tmp_name"], $target_file)){
-            echo "<script>alert('Upload gone through');</script>";
 
                 return $target_file;
             }else{
@@ -70,14 +67,10 @@ class post extends Db_Connect{
         $run = $this->connect()->prepare($query);
         $run->execute([$this->user_id]);
         if($run->rowCount() < 1){
-            echo "<script>alert('You must be logged in to make a post');</script>";
+            echo "<script>alert('You must be logged in to make a post'); window.open('loginpage.php','_self');</script>";
         }else{
             //check file
             $post_file = $this->get_post_file();
-            if($post_file === -1){
-                echo "<script>alert('File not uploaded coz of here');</script>";
-                return;
-            }
             //update comment table
             $new_no_posts = $this->no_posts+1;
             $query = "update eucossa.users set posts =? where id =?";
@@ -87,7 +80,6 @@ class post extends Db_Connect{
             $query = "insert into eucossa.posts(post_file,post_id,post_text,user_id) values(?,?,?,?)";
             $run = $this->connect()->prepare($query);
             $run->execute([$this->post_file, $this->post_id, $this->post_text, $this->user_id]);
-            echo "<script>alert('post saved');</script>";
         }
     }
     
@@ -98,14 +90,12 @@ if(isset($_SESSION['email']) && isset($_POST['upload'])){
     if(strlen($file) == 0){
         $file = 0;
     }
-    echo "<script>alert('$file is the file');</script>";        
     $class = new post($_POST['post'],$file);
-    echo "<script>alert('post saved and am out');</script>";
-    echo "<script>window.open('test_index.php','_self')</script>";
+    echo "<script>window.open('index.php','_self')</script>";
 
 }else{
     echo "<script>alert('You must be logged in to post to a comment');</script>";
-    echo "<script>window.open('test_index.php','_self')</script>";
+    echo "<script>window.open('loginpage.php','_self')</script>";
 
 }
 

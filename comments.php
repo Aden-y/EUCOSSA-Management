@@ -83,6 +83,6 @@
       $p_id=$_POST['p_id'];
       $com=new Comment($comment_text,$p_id);          
     }
-   header("Location:test_index.php");
+   header("Location:index.php");
    
 ?>
